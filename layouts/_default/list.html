@@ -39,6 +39,9 @@
 {{- end }}
 
 {{- $pages := .RegularPages }}
+{{- if .IsSection }}
+{{- $pages = where site.RegularPages "RelPermalink" "hasPrefix" .RelPermalink }}
+{{- end }}
 
 {{- if .IsHome }}
 {{- $pages = where site.RegularPages "Type" "in" site.Params.mainSections }}

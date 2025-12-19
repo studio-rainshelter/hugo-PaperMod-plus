@@ -40,7 +40,13 @@
 
 {{- $pages := .RegularPages }}
 {{- if .IsSection }}
-{{- $pages = where site.RegularPages "RelPermalink" "hasPrefix" .RelPermalink }}
+{{- $pages = slice }}
+{{- $currentSection := . }}
+{{- range where site.RegularPages "Section" .Section }}
+{{- if $currentSection.IsAncestor . }}
+{{- $pages = $pages | append . }}
+{{- end }}
+{{- end }}
 {{- end }}
 
 {{- if .IsHome }}

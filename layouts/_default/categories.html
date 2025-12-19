@@ -1,0 +1,26 @@
+{{- define "main" }}
+
+<header class="page-header">
+    <h1>{{- .Title }}</h1>
+</header>
+
+{{- $posts := site.GetPage "section" "posts" }}
+{{- if $posts }}
+<ul class="category-list">
+    {{- range $posts.Sections }}
+    <li>
+        <a href="{{ .Permalink }}" class="category-link">
+            {{ .Title }}
+            <span class="category-count">({{ len .Pages }})</span>
+        </a>
+        {{- if .Sections }}
+        {{- partial "category_list.html" . }}
+        {{- end }}
+    </li>
+    {{- end }}
+</ul>
+{{- else }}
+<p>No categories found.</p>
+{{- end }}
+
+{{- end }}

@@ -10,24 +10,30 @@
 .sidebar {
     width: 250px;
     flex-shrink: 0;
-    padding-top: var(--gap);
+    padding-top: 80px;
 }
 
 .main {
     flex-grow: 1;
-    max-width: var(--main-width); /* Enhance compatibility with existing basic styles */
-    margin: 0; /* Reset margin since wrapper handles centering */
+    max-width: var(--main-width);
+    /* Enhance compatibility with existing basic styles */
+    margin: 0;
+    /* Reset margin since wrapper handles centering */
 }
 
 /* Mobile Responsiveness */
-@media (max-width: 1000px) { /* Adjust breakpoint as needed */
+@media (max-width: 1000px) {
+
+    /* Adjust breakpoint as needed */
     .page-wrapper {
         flex-direction: column;
     }
+
     .sidebar {
         width: 100%;
         margin-bottom: var(--gap);
     }
+
     .main {
         max-width: 100%;
     }

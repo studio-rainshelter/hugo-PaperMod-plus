@@ -1,0 +1,74 @@
+/* Sidebar Layout */
+.page-wrapper {
+    display: flex;
+    max-width: calc(var(--main-width) + var(--gap) + 250px);
+    margin: 0 auto;
+    padding: 0 var(--gap);
+    gap: var(--gap);
+}
+
+.sidebar {
+    width: 250px;
+    flex-shrink: 0;
+    padding-top: var(--gap);
+}
+
+.main {
+    flex-grow: 1;
+    max-width: var(--main-width); /* Enhance compatibility with existing basic styles */
+    margin: 0; /* Reset margin since wrapper handles centering */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1000px) { /* Adjust breakpoint as needed */
+    .page-wrapper {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        margin-bottom: var(--gap);
+    }
+    .main {
+        max-width: 100%;
+    }
+}
+
+/* Sidebar Menu Styles */
+.sidebar-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.category-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.category-list li {
+    margin-bottom: 0.5rem;
+}
+
+.category-list ul {
+    list-style: none;
+    padding-left: 1rem;
+    margin-top: 0.5rem;
+    border-left: 1px solid var(--border);
+}
+
+.category-link {
+    display: block;
+    text-decoration: none;
+    color: var(--primary);
+    transition: color 0.2s;
+}
+
+.category-link:hover {
+    color: var(--secondary);
+}
+
+.category-count {
+    font-size: 0.8em;
+    color: var(--secondary);
+    margin-left: 0.3em;
+}

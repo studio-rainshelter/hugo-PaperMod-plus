@@ -1,0 +1,11 @@
+<aside class="sidebar">
+    <div class="sidebar-inner">
+        <h3 class="sidebar-title">Categories</h3>
+        {{- $posts := site.GetPage "section" "posts" }}
+        {{- if $posts }}
+        {{- partial "category_list.html" $posts }}
+        {{- else }}
+        <p>No categories found.</p>
+        {{- end }}
+    </div>
+</aside>

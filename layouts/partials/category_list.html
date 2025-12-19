@@ -1,0 +1,13 @@
+<ul class="category-list">
+    {{- range .Sections }}
+    <li>
+        <a href="{{ .Permalink }}" class="category-link">
+            {{ .Title }}
+            <span class="category-count">({{ len .Pages }})</span>
+        </a>
+        {{- if .Sections }}
+        {{- partial "category_list.html" . }}
+        {{- end }}
+    </li>
+    {{- end }}
+</ul>

@@ -3,7 +3,7 @@
     <li>
         <a href="{{ .Permalink }}" class="category-link">
             {{ .Title }}
-            <span class="category-count">({{ len .Pages }})</span>
+            <span class="category-count">({{ partial "category_count.html" . }})</span>
         </a>
         {{- if .Sections }}
         {{- partial "category_list.html" . }}

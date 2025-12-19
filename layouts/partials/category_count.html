@@ -1,0 +1,8 @@
+{{- $count := 0 }}
+{{- $currentSection := . }}
+{{- range where site.RegularPages "Section" "posts" }}
+{{- if $currentSection.IsAncestor . }}
+{{- $count = add $count 1 }}
+{{- end }}
+{{- end }}
+{{- $count }}

@@ -1,0 +1,224 @@
+/* Sticky Sidebar TOC Styles */
+
+/* 
+   Wrapper Container 
+   - Keeps the main content width standard (var(--main-width))
+   - Centers the content as usual
+*/
+.toc-sidebar-container {
+    position: relative;
+    max-width: var(--main-width);
+    margin: auto;
+}
+
+/* 
+   Sidebar (Desktop) 
+   - Positioned strictly to the left of the content
+   - Uses absolute positioning so it doesn't affect content flow
+*/
+@media (min-width: 1240px) {
+    .toc-sidebar {
+        position: absolute;
+        right: 100%;
+        /* Push to the left edge of the container */
+        top: 0;
+        bottom: 0;
+        /* Full height to allow sticky child */
+        width: 260px;
+        /* Sidebar width */
+        margin-right: 50px;
+        /* Increased gap */
+
+        text-align: left;
+        padding-top: 10px;
+    }
+
+    /* The actual sticky element inside the sidebar */
+    .toc-sidebar .toc {
+        position: sticky;
+        top: calc(var(--header-height) + 40px);
+        /* Top offset */
+        max-height: calc(100vh - 150px);
+        overflow-y: auto;
+
+        /* Box Style from Reference Image */
+        background: var(--entry);
+        /* Using entry bg for slight contrast if available, or code-bg */
+        background: rgb(40, 40, 45);
+        /* Fallback/Specific dark variable if needed, but let's try to use theme vars */
+        background: var(--code-bg);
+
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 15px;
+        /* More padding inside the box */
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    }
+
+    /* 
+       Theme Variable Adaptation 
+       - If user is in dark mode, --code-bg is usually good.
+       - Let's assume standard PaperMod vars.
+    */
+
+    /* Scrollbar styling for TOC */
+    .toc-sidebar .toc::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .toc-sidebar .toc::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .toc-sidebar .toc::-webkit-scrollbar-thumb {
+        background: var(--tertiary);
+        border-radius: 4px;
+    }
+
+    /* Header Style: "▼ Table of Contents" */
+    .toc-sidebar summary {
+        display: block;
+        cursor: pointer;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+        font-weight: 700;
+        font-size: 20px;
+        color: var(--primary);
+        list-style: none;
+        /* Hide default triangle to replace or style it */
+    }
+
+    /* Custom Indicator */
+    .toc-sidebar summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .toc-sidebar summary::before {
+        content: "▼";
+        display: inline-block;
+        margin-right: 5px;
+        font-size: 20px;
+        vertical-align: middle;
+        transition: transform 0.2s;
+        color: var(--secondary);
+    }
+
+    .toc-sidebar details[open] summary::before {
+        transform: rotate(0deg);
+    }
+
+    .toc-sidebar details:not([open]) summary::before {
+        transform: rotate(-90deg);
+    }
+
+
+    /* Inner List Structure */
+    .toc-sidebar .inner {
+        margin: 0;
+        padding: 0;
+    }
+
+    .toc-sidebar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* General Link Styles */
+    .toc-sidebar a {
+        color: var(--secondary);
+        text-decoration: none;
+        display: block;
+        transition: color 0.2s;
+        line-height: 1.6;
+        padding: px 0;
+        font-size: 16px;
+    }
+
+    .toc-sidebar a:hover {
+        color: var(--primary);
+        text-decoration: none;
+        box-shadow: 0 1px 0 var(--primary);
+    }
+
+    /* Hierarchy & Indentation */
+
+    /* Level 1 (Top) */
+    .toc-sidebar>.toc>.inner>ul>li {
+        margin-bottom: 8px;
+    }
+
+    .toc-sidebar>.toc>.inner>ul>li>a {
+        font-weight: 600;
+        /* Bolder for main sections */
+        color: var(--primary);
+        font-size: 16px;
+        /* Optimized readable size */
+        margin-top: 10px;
+    }
+
+    /* Level 2 */
+    .toc-sidebar li ul {
+        padding-left: 2px;
+        /* Minimal indent */
+        margin-top: 2px;
+        border-left: 1px solid var(--border);
+        border-left: none;
+    }
+
+    .toc-sidebar li ul li a {
+        font-weight: 400;
+        font-size: 15px;
+        /* Readable secondary size */
+        color: var(--secondary);
+    }
+
+    /* Level 3 */
+    .toc-sidebar li ul li ul {
+        padding-left: 0px;
+        /* Minimal indent */
+    }
+
+    .toc-sidebar li ul li ul li a {
+        font-size: 14.5px;
+        /* Clear tertiary size */
+        color: var(--secondary);
+        opacity: 0.9;
+    }
+
+    /* Level 4 */
+    .toc-sidebar li ul li ul li ul li a {
+        font-size: 14px;
+        /* Minimum comfortable size */
+        opacity: 0.8;
+    }
+
+    /* Active Link (if supported by JS later) - for now just hover */
+}
+
+/* 
+   Responsive / Mobile Fallback 
+   - If screen is too narrow for sidebar + content, revert to standard top placement
+*/
+@media (max-width: 1239px) {
+    .toc-sidebar {
+        display: block;
+        width: 100%;
+        margin-bottom: var(--content-gap);
+        background: var(--entry);
+        border-radius: var(--radius);
+        padding: 10px 20px;
+        border: 1px solid var(--border);
+    }
+
+    .toc-sidebar summary {
+        cursor: pointer;
+        padding: 5px 0;
+        font-weight: bold;
+    }
+}
+
+/* Undo the Max-Width expansion from previous step if it exists */
+.main:has(.toc-sidebar-container) {
+    max-width: calc(var(--main-width) + var(--gap) * 2);
+}

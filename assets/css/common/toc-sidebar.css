@@ -202,19 +202,7 @@
 */
 @media (max-width: 1239px) {
     .toc-sidebar {
-        display: block;
-        width: 100%;
-        margin-bottom: var(--content-gap);
-        background: var(--entry);
-        border-radius: var(--radius);
-        padding: 10px 20px;
-        border: 1px solid var(--border);
-    }
-
-    .toc-sidebar summary {
-        cursor: pointer;
-        padding: 5px 0;
-        font-weight: bold;
+        display: none;
     }
 }
 
